@@ -202,3 +202,5 @@ And some scopes used only for web apps
 
 with @PostConstruct we can add custom init code that runs after the bean is constructed
 with @PreDestroy we can specify things to happen once the bean is destroyed
+
+Note: if the prototype scope is used, we cant access the @PreDestroy lifecycle step, since spring hands the reference to the client after its initialized
