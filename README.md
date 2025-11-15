@@ -217,3 +217,29 @@ Use Case for @Bean
 the main use case is when you cant to make an existing third-party class available to the spring framework. You may not have access to the source code of the third-party class, However, you would like to use it as a Spring Bean
 
 we can give the @Bean a custom name by specifying it inside the annotation, if not, its the function name (camelCase)
+
+# 3 Hibernate and JPA
+
+Hibernate its a framework for persisting objects in a database
+
+- It handles the ORM and all low level SQL queries
+- We map a Java Class to a Database Table
+
+JPA (Jakarta Persistence API) is a standard api for object to relational mapping that defines a set of interfaces that require an implementation to be usable
+
+Hibernate is an implementation of the JPA Spec, EclipseLink is another
+
+By having a standard API we are not locked to the vendor
+
+to save an object we create it and then use
+entityManager.persist(someObject)
+
+## 3.1 Hibernate JPA and JDBC
+
+JDBC is still used, Hibernate making use of it to communicate with the database
+
+Spring will automatically inject the beans for DataSource, EntityManager, etc
+
+## 3.2 MySql
+
+Its a standard rest DB that comes with a workbench that has a client GUI

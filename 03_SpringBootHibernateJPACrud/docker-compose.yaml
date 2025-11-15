@@ -1,0 +1,24 @@
+version: "3.8"
+
+services:
+  # 1. MySQL Database Container
+  db:
+    image: mysql:8.0
+    container_name: java-project-mysql
+    restart: always
+    environment:
+      # Use these credentials to connect to the database from Java, CloudBeaver, or root login
+      MYSQL_ROOT_PASSWORD: mysecretrootpassword
+      MYSQL_DATABASE: my_java_database
+      MYSQL_USER: my_app_user
+      MYSQL_PASSWORD: my_app_password
+    ports:
+      # Exposes the default MySQL port 3306 on your host machine
+      - "3306:3306"
+    volumes:
+      # Persist data to prevent loss when the container stops
+      - db-data:/var/lib/mysql
+
+# Define named volumes for data persistence
+volumes:
+  db-data:
