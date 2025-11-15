@@ -150,3 +150,7 @@ here we specify with the bean name, wich is the same as the class name but with 
 for setter injection we can use the same @Qualifier
 
 we can also solve the issue with the @Primary anotation
+
+if useing both anotations, qualifier has a higher priority
+
+## 1.6 Primary
