@@ -1,11 +1,11 @@
-package com.andy.sprigcoredemo.rest;
+package com.andy.springcoredemo.rest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.andy.sprigcoredemo.common.Coach;
+import com.andy.springcoredemo.common.Coach;
 
 @RestController
 public class DemoController {
@@ -14,7 +14,7 @@ public class DemoController {
 
     // Define a constructor for dependency injection
     @Autowired
-    public DemoController(@Qualifier("cricketCoach") Coach theCoach){
+    public DemoController(@Qualifier("swimCoach") Coach theCoach){
         System.out.println("In Constructor: " + getClass().getSimpleName());
         myCoach = theCoach;
     }

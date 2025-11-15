@@ -1,17 +1,17 @@
-package com.andy.sprigcoredemo.common;
+package com.andy.springcoredemo.common;
 
 import org.springframework.stereotype.Component;
 
 @Component
-public class BaseballCoach implements Coach {
+public class TennisCoach implements Coach {
 
-    public BaseballCoach() {
+    public TennisCoach() {
         System.out.println("In Constructor: " + getClass().getSimpleName());
     }
 
     @Override
     public String getDailyWorkout() {
-        return "Spend 30 minutes in batting practice";
+        return "Practice you backhand volley";
     }
 
 }
