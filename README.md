@@ -14,7 +14,7 @@ To run we can use either:
 
 # Spring Boot
 
-## 05 Application Properties File
+## 0.5 Application Properties File
 
 By default, spring boot reads information fro a standard props file in src/main/resources/application.properties
 we can define any props in this file, and we can then access them by using the @Value anotation
@@ -45,7 +45,7 @@ These props are devided on
 - DevTools
 - Testing
 
-## 06 Inversion of controll (IoC) and the Spring Container
+## 1.1 Inversion of controll (IoC) and the Spring Container
 
 Its the approach of outsourcing the constructoin and management of objects
 Spring container works as an object factory
