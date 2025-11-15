@@ -243,3 +243,5 @@ Spring will automatically inject the beans for DataSource, EntityManager, etc
 ## 3.2 MySql
 
 Its a standard rest DB that comes with a workbench that has a client GUI
+
+we need to add the connection dettails on the application.properties
