@@ -215,3 +215,5 @@ why not just use the @Component?
 
 Use Case for @Bean
 the main use case is when you cant to make an existing third-party class available to the spring framework. You may not have access to the source code of the third-party class, However, you would like to use it as a Spring Bean
+
+we can give the @Bean a custom name by specifying it inside the annotation, if not, its the function name (camelCase)
