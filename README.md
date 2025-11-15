@@ -132,3 +132,21 @@ Development process - using setter injection
   - Coach theCoach = new CricketCoach()
   - DemoController demoController = new DemoController()
   - demoController.setCoach(theCoach)
+
+## 1.4 Field injection with annotations and Autowiring
+
+Field injections are not recomended by the spring dev team
+it makes the code harder to unit test
+its acomplished by using reflection
+it works by putting the @Autowired prop on top of prop field iteslf
+
+## 1.5 Autowiring and Qualifiers
+
+what happens if we have multiple implementations for an autowired prop
+
+we can specify the exact implementation we want by using the @Qualifier Annotation
+@Qualifier("cricketCoack")
+here we specify with the bean name, wich is the same as the class name but with camelcase
+for setter injection we can use the same @Qualifier
+
+we can also solve the issue with the @Primary anotation
