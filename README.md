@@ -204,3 +204,14 @@ with @PostConstruct we can add custom init code that runs after the bean is cons
 with @PreDestroy we can specify things to happen once the bean is destroyed
 
 Note: if the prototype scope is used, we cant access the @PreDestroy lifecycle step, since spring hands the reference to the client after its initialized
+
+## 1.10 Java Code Config
+
+1. Create @Configuration class
+2. Define @Bean method to configure the bean
+3. Inject the bean into our controller
+
+why not just use the @Component?
+
+Use Case for @Bean
+the main use case is when you cant to make an existing third-party class available to the spring framework. You may not have access to the source code of the third-party class, However, you would like to use it as a Spring Bean
