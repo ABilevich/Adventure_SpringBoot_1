@@ -162,3 +162,12 @@ by default all beans are initialized on application start, spring creates an ins
 if lazy initialization is used, a bean will only be initialized if its needed for dependency injection, or its explicitly requested
 
 This is accomplished by using the @Lazy annotation
+
+we can setup
+spring.main.lazy-initialization=true
+
+with this setting, all beans are lazy an no been created until its needed
+
+The advantages are speed, it has some problems for @RestControllers and there may be configurations that dont fail until its too late,
+
+its better no not do early optimization in this case.
