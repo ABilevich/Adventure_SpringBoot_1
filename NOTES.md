@@ -44,3 +44,48 @@ These props are devided on
 - Integration
 - DevTools
 - Testing
+
+## 06 Inversion of controll (IoC) and the Spring Container
+
+Its the approach of outsourcing the constructoin and management of objects
+Spring container works as an object factory
+it has two primary functions
+
+- Create and manage objects (inversoin of controll)
+- Inject object dependencies (Dependency Injection)
+
+we can configure it with XML (Legacy), Java anotations (Modern) or Java source Code (Modern)
+
+### Dependency injectoin
+
+The client dleegates to another object the responsability of providing its dependencies
+
+Types
+
+- Constructure injections
+  - Use when you have required dependencies (recomended as first choice)
+- Setter injections
+  - Use when you hvae optional dependencies (the app should work with default logic if this dependency is not provided)
+
+Autowiring
+
+- For dependency injectoin, spring can use autowiring
+- Spring will look for a class that mathes and will inject it automaticaly
+  - By tipe: class or interface
+- If you want to inject a Coach implementation
+  - Sping will scan for @Components (marked as spring beans)
+  - Any one implements the Coach Interface?
+  - If so, lets inject them, for exmaple CricketCoach
+
+Development process - using constructor injection
+
+1. Define the dependency interface and class
+2. create Demo REST controller
+3. create a constructor in the class for injections
+4. add @GetMapping for /dailyWorkout
+
+@Component annotation
+
+- Marks the class as a Spring Bean
+  - is a regular java class that is managed by pring
+- Makes the component available for dependency injection
