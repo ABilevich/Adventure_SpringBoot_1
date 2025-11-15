@@ -16,7 +16,7 @@ To run we can use either:
 - (from the target dir) java -jar demo-0.0.1-SNAPSHOT.jar
 - (from the root dir) mvn spring-boot:run
 
-# Spring Boot
+# 0 Basic Spring config
 
 ## 0.5 Application Properties File
 
@@ -49,7 +49,7 @@ These props are devided on
 - DevTools
 - Testing
 
-## 1.1 Inversion of controll (IoC) and the Spring Container
+# 1 Inversion of controll (IoC) and the Spring Container
 
 Its the approach of outsourcing the constructoin and management of objects
 Spring container works as an object factory
@@ -60,7 +60,7 @@ it has two primary functions
 
 we can configure it with XML (Legacy), Java anotations (Modern) or Java source Code (Modern)
 
-### Dependency injectoin
+## 1.1 Dependency injectoin
 
 The client dleegates to another object the responsability of providing its dependencies
 
@@ -94,13 +94,13 @@ Development process - using constructor injection
   - is a regular java class that is managed by pring
 - Makes the component available for dependency injection
 
-### Controller Injection
+## 1.2 Controller Injection
 
 - Spring is doing
   - Coach theCoach = new CricketCoach()
-  - DemoController demoController - newDemoController(theCoach)
+  - DemoController demoController = new DemoController(theCoach)
 
-## 1.2 Component Scanning
+### Component Scanning
 
 - Spring will scann you java classes for special anotations (@Component, etc)
 - It will automatically register the beans in the spring container
@@ -112,3 +112,23 @@ Anotations (That componse @SpringBootApplication)
 
 - Spring will scann any packages under the main folder recursively, they all need to be inside the springcoredemo package in this case
 - This can be overwritten on the @SpringBootApplication anotation by specifiyong the scanBasePackages to include aditional packages
+
+## 1.3 Setter injection
+
+Its when we inject dependencies by calling the setter methods on our class
+
+To Inject the cach implementation
+
+1. Spring will scan for @Components
+2. Does anyone implement the Coach interface?
+3. If so, lets inject them, for example CricketCoach
+
+Development process - using setter injection
+
+1. Create setter method(s) in your class for injections
+2. configure the dependency injection with @Autowired Annotation
+
+- Spring is doing
+  - Coach theCoach = new CricketCoach()
+  - DemoController demoController = new DemoController()
+  - demoController.setCoach(theCoach)
