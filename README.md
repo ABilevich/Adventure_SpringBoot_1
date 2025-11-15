@@ -187,3 +187,18 @@ And some scopes used only for web apps
 - session: Scoped to an HTTP web session
 - application: Scoped to a web app ServletContext
 - websocket: Scoped to a web socket
+
+## 1.9 Bean Lifecycle method
+
+1. Container Start
+2. Bean Instantiated
+3. Dependency injection
+4. Internal Spring processing
+5. Your custom init method
+6. Bean is ready to use
+7. Container is shutdown
+8. Your custom destroy method
+9. Stop
+
+with @PostConstruct we can add custom init code that runs after the bean is constructed
+with @PreDestroy we can specify things to happen once the bean is destroyed
