@@ -1,14 +1,28 @@
 package com.example.demo.rest;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class FunRestController {
 
+    // Here we inject props for coach.name and team.name
+    @Value("${coach.name}")
+    private String coachName;
+    
+    @Value("${team.name}")
+    private String teamName;
+
     @GetMapping("/")
     public String sayHello(){
         return "Hello World!";
+    }
+
+    // Expose a new enpoint for "teamInfo"
+    @GetMapping("/teamInfo")
+    public String getTeamInfo() {
+        return "Coach: " + coachName + ", Team name: " + teamName;
     }
 
     // expose a new endpoint for workout
@@ -23,7 +37,7 @@ public class FunRestController {
         return "Today is your lucky day!";
     }
 
-        // expose a new endpoint for "fortune"
+    // expose a new endpoint for "fortune"
     @GetMapping("/fortune2")
     public String getDailyFortune2(){
         return "Today is your lucky day!";
