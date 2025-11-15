@@ -1,3 +1,7 @@
+# To run using vs code
+
+Open any 0X numbered folder directly, not the root folder (the one with the readme)
+
 # Maven
 
 instead of installing maven, we should be able to use ./mvnw
@@ -89,3 +93,22 @@ Development process - using constructor injection
 - Marks the class as a Spring Bean
   - is a regular java class that is managed by pring
 - Makes the component available for dependency injection
+
+### Controller Injection
+
+- Spring is doing
+  - Coach theCoach = new CricketCoach()
+  - DemoController demoController - newDemoController(theCoach)
+
+## 1.2 Component Scanning
+
+- Spring will scann you java classes for special anotations (@Component, etc)
+- It will automatically register the beans in the spring container
+
+Anotations (That componse @SpringBootApplication)
+@EnableAutoConfiguration: Enables spring boot's auto-configuration support
+@ComponentScan: Enables component scanning of current package (also recurseively scans sub packages)
+@Configuration: Able to register extra beans with @Bean or import other configuration classes
+
+- Spring will scann any packages under the main folder recursively, they all need to be inside the springcoredemo package in this case
+- This can be overwritten on the @SpringBootApplication anotation by specifiyong the scanBasePackages to include aditional packages
