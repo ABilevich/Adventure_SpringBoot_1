@@ -1,4 +1,4 @@
-package com.andy.sprigcoredemo.common;
+package com.andy.util;
 
 public interface Coach {
     String getDailyWorkout();
