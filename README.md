@@ -6,9 +6,9 @@ Open any 0X numbered folder directly, not the root folder (the one with the read
 
 instead of installing maven, we should be able to use ./mvnw
 
-# Running the app from comand line
+# Running the app from command line
 
-To Pachage teh app
+To Package teh app
 mvn package
 
 To run we can use either:
@@ -21,10 +21,10 @@ To run we can use either:
 ## 0.5 Application Properties File
 
 By default, spring boot reads information fro a standard props file in src/main/resources/application.properties
-we can define any props in this file, and we can then access them by using the @Value anotation
+we can define any props in this file, and we can then access them by using the @Value annotation
 
 A full list of common spring boot related props (port, etc) and be found [here](https://docs.spring.io/spring-boot/appendix/application-properties/index.html)
-These props are devided on
+These props are divided on
 
 - Core
   - logging.level (based on package name)
@@ -32,54 +32,54 @@ These props are devided on
   - logging.file.path
 - Web
   - server.port=7070 (HTTP Server Port)
-  - server.servlet.context-path=/my-silly-app (Context parh of the application)
-  - server.servlet.session.timeout=15m (Default timout is 30m)
+  - server.servlet.context-path=/my-silly-app (Context path of the application)
+  - server.servlet.session.timeout=15m (Default timeout is 30m)
 - Security
   - spring.security.user.name=admin
-  - spring.security.user.password=securaPassword
+  - spring.security.user.password=securePassword
 - Data
-  - spring.datasouurce.url=jdbc:mysql://localhost:3306/ecomerce
+  - spring.datasource.url=jdbc:mysql://localhost:3306/database
   - spring.datasource.username=scot
-  - spring.datasource.password=somepass
+  - spring.datasource.password=something
 - Actuator
-  - management.endpoints.web.exposure.include (Endpoints to include by name or dildcard)
-  - management.endpoints.web.exposure.exclude (Endpoints to exclude by name or dildcard)
-  - management.endpoints.web.base-path=/actuator (Base path for atuator endpoints)
+  - management.endpoints.web.exposure.include (Endpoints to include by name or wildcard)
+  - management.endpoints.web.exposure.exclude (Endpoints to exclude by name or wildcard)
+  - management.endpoints.web.base-path=/actuator (Base path for actuator endpoints)
 - Integration
 - DevTools
 - Testing
 
-# 1 Inversion of controll (IoC) and the Spring Container
+# 1 Inversion of control (IoC) and the Spring Container
 
-Its the approach of outsourcing the constructoin and management of objects
+Its the approach of outsourcing the construction and management of objects
 Spring container works as an object factory
 it has two primary functions
 
-- Create and manage objects (inversoin of controll)
+- Create and manage objects (inversion of control)
 - Inject object dependencies (Dependency Injection)
 
-we can configure it with XML (Legacy), Java anotations (Modern) or Java source Code (Modern)
+we can configure it with XML (Legacy), Java annotations (Modern) or Java source Code (Modern)
 
-## 1.1 Dependency injectoin
+## 1.1 Dependency injection
 
-The client dleegates to another object the responsability of providing its dependencies
+The client delegates to another object the responsibility of providing its dependencies
 
 Types
 
-- Constructure injections
-  - Use when you have required dependencies (recomended as first choice)
+- Constructor injections
+  - Use when you have required dependencies (recommended as first choice)
 - Setter injections
-  - Use when you hvae optional dependencies (the app should work with default logic if this dependency is not provided)
+  - Use when you have optional dependencies (the app should work with default logic if this dependency is not provided)
 
 Autowiring
 
-- For dependency injectoin, spring can use autowiring
-- Spring will look for a class that mathes and will inject it automaticaly
-  - By tipe: class or interface
+- For dependency injection, spring can use autowiring
+- Spring will look for a class that matches and will inject it automatically
+  - By type: class or interface
 - If you want to inject a Coach implementation
-  - Sping will scan for @Components (marked as spring beans)
+  - Spring will scan for @Components (marked as spring beans)
   - Any one implements the Coach Interface?
-  - If so, lets inject them, for exmaple CricketCoach
+  - If so, lets inject them, for example CricketCoach
 
 Development process - using constructor injection
 
@@ -91,7 +91,7 @@ Development process - using constructor injection
 @Component annotation
 
 - Marks the class as a Spring Bean
-  - is a regular java class that is managed by pring
+  - is a regular java class that is managed by spring
 - Makes the component available for dependency injection
 
 ## 1.2 Controller Injection
@@ -102,22 +102,22 @@ Development process - using constructor injection
 
 ### Component Scanning
 
-- Spring will scann you java classes for special anotations (@Component, etc)
+- Spring will scan you java classes for special annotations (@Component, etc)
 - It will automatically register the beans in the spring container
 
-Anotations (That componse @SpringBootApplication)
+Annotations (That compose @SpringBootApplication)
 @EnableAutoConfiguration: Enables spring boot's auto-configuration support
-@ComponentScan: Enables component scanning of current package (also recurseively scans sub packages)
+@ComponentScan: Enables component scanning of current package (also recursively scans sub packages)
 @Configuration: Able to register extra beans with @Bean or import other configuration classes
 
-- Spring will scann any packages under the main folder recursively, they all need to be inside the springcoredemo package in this case
-- This can be overwritten on the @SpringBootApplication anotation by specifiyong the scanBasePackages to include aditional packages
+- Spring will scan any packages under the main folder recursively, they all need to be inside the springcoredemo package in this case
+- This can be overwritten on the @SpringBootApplication annotation by specifying the scanBasePackages to include aditional packages
 
 ## 1.3 Setter injection
 
 Its when we inject dependencies by calling the setter methods on our class
 
-To Inject the cach implementation
+To Inject the catch implementation
 
 1. Spring will scan for @Components
 2. Does anyone implement the Coach interface?
@@ -135,22 +135,28 @@ Development process - using setter injection
 
 ## 1.4 Field injection with annotations and Autowiring
 
-Field injections are not recomended by the spring dev team
+Field injections are not recommended by the spring dev team
 it makes the code harder to unit test
-its acomplished by using reflection
-it works by putting the @Autowired prop on top of prop field iteslf
+its accomplished by using reflection
+it works by putting the @Autowired prop on top of prop field itself
 
 ## 1.5 Autowiring and Qualifiers
 
 what happens if we have multiple implementations for an autowired prop
 
 we can specify the exact implementation we want by using the @Qualifier Annotation
-@Qualifier("cricketCoack")
-here we specify with the bean name, wich is the same as the class name but with camelcase
+@Qualifier("cricketCoach")
+here we specify with the bean name, which is the same as the class name but with camelcase
 for setter injection we can use the same @Qualifier
 
-we can also solve the issue with the @Primary anotation
-
-if useing both anotations, qualifier has a higher priority
-
 ## 1.6 Primary
+
+we can also solve the issue with the @Primary annotation
+
+if using both annotations, qualifier has a higher priority
+
+## 1.7 Lazy initialization
+
+by default all beans are initialized on application start, spring creates an instance of each one and makes it available
+
+if lazy initialization is used, a bean will only be initialized if its needed for dependency injection, or its explicitly requested
