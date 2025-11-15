@@ -168,6 +168,22 @@ spring.main.lazy-initialization=true
 
 with this setting, all beans are lazy an no been created until its needed
 
-The advantages are speed, it has some problems for @RestControllers and there may be configurations that dont fail until its too late,
+The advantages are speed, it has some problems for @RestControllers and there may be configurations that don't fail until its too late,
 
 its better no not do early optimization in this case.
+
+## 1.8 Bean scope
+
+the default scope is singleton (only one instance is created)
+
+we could specify the scope in the class itself
+
+- singleton: Create a single shared instance of the bean (Default)
+- prototype: Creates a new bean instance for each container request
+
+And some scopes used only for web apps
+
+- request: Scoped to an HTTP web request
+- session: Scoped to an HTTP web session
+- application: Scoped to a web app ServletContext
+- websocket: Scoped to a web socket
