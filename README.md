@@ -160,3 +160,5 @@ if using both annotations, qualifier has a higher priority
 by default all beans are initialized on application start, spring creates an instance of each one and makes it available
 
 if lazy initialization is used, a bean will only be initialized if its needed for dependency injection, or its explicitly requested
+
+This is accomplished by using the @Lazy annotation
