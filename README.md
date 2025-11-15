@@ -245,3 +245,125 @@ Spring will automatically inject the beans for DataSource, EntityManager, etc
 Its a standard rest DB that comes with a workbench that has a client GUI
 
 we need to add the connection details on the application.properties
+
+## 3.3 JPA Development process
+
+1. Annotate the Java Class
+2. Develop Java Code to perform database operations
+
+An entity class is a java class that is mapped to a db table, these classes need:
+
+- To be annotated with the @Entity
+- To have a public or protected no argument constructor (It could have more than one)
+
+we need to
+
+1. map the class to a db table (@Table(name="tableName"))
+2. ma the fields to db columns (@Column(name="columnName"))
+
+if the annotation has no name, the class/field name is used, this is not recommended
+
+### Generation Strategies
+
+we can use the @Id to annotate a field as an id and autoincremented with @GeneratedValue
+
+- GenerationType.AUTO - Pick an appropriate strategy for the particular database
+- GenerationType.IDENTITY - assign primary keys using database identity column
+- GenerationType.SEQUENCE - Assign primary keys using database sequence
+- GenerationType.TABLE - Assign primary keys using an underlying database table to ensure uniqueness
+- GenerationType.UUID - Assign primary keys using a globally unique identifier (UUID) to ensure uniqueness
+
+a custom strategy can also be defined.
+
+## 3.4 DAO (Data Access Object)
+
+- Its responsible for interfacing with the database
+- It needs a JPA Entity Manager
+  - This needs a datasource (created by spring boot)
+  - It can be injected into our DAO
+
+1. We need to define a DAO interface
+2. Define the dao implementation
+
+### JPA Repository vs Entity Manager
+
+This are both different techniques of using JPA
+
+- Entity manager (Low Level)
+
+  - Need low level control over the database operations and want to write custom queries
+  - Provides low level access to JPA and work directly with JPA entities
+  - Complex queries that required advanced features such as native SQL queries or stored procedure calls
+  - when you have custom requirements that are note easily handled by higher level abstractions
+
+- JPA Repository (High level)
+  - Provides commonly used CRUD operations out of the box, reducing the amount of code you need ot write
+  - additional features such as pagination, sorting
+  - Generate queries based on method names
+  - Can also create custom queries using @Query
+
+The choice depends on your requirements/preferences, but you can use both at the same time
+
+### @Transactional
+
+Spring provides a @Transactional annotation, and uses it in the background
+
+We can use it by adding the annotation on our dao implementation
+
+### @Repository
+
+Its used to apply to a DAO implementation, it also provides translation of some JDBC exceptions
+
+## 3.5 Entity Manager
+
+### Save
+
+to save an object we use
+entityManager.persist(studentInstance);
+
+### Find
+
+to find an object we use
+entityManager.find(Student.class, 1)
+
+### Find All
+
+to find more than one object we use the JPQL (JPA Query language) its a similar concept to SQL, however we use entity name and entity fields and not table name/fields
+
+with strict JPQL the select clause is required
+
+### Update
+
+first we call the find, then we use the setters of the object to update then call merge()
+
+we can also perform an update on multiple entities with createQuery
+
+### Delete
+
+we do a find, and then a remove
+
+we can also do conditional deletes with createQuery
+(we use executeUpdate() pon the createQuery even though its a delete)
+
+## Creating tables based on code
+
+Hibernate has a tool to generate a table based on the java Entities
+
+if we use spring.jpa.hibernate.ddl-auto=create hibernate will create all the tables from scratch based on the JPA/Hibernate annotations in our JAVA code
+
+we can set the prop to multiple values
+
+- none: nothing is done
+- create: databases are dropped followed by database table creation
+- create-drop: databases are dropped followed by database table creation, on application shutdown the databases are also dropped
+- validate: validate the database table schema
+- update: update the database table schema
+
+this is very useful for integration testing or hobby projects
+for production dbs, a sql script should be used
+
+## Logging
+
+we can see whats happening with
+logging.level.org.hibernate.SQL=debug
+logging.level.org.hibernate.orm.jdbc.bind=trace
